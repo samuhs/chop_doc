@@ -5,12 +5,13 @@ readme = "README.md"
 authors = [
   { name="Samuel Silva", email="samuelhs98@gmail.com" },
 ]
-description = "Add your description here"
-requires-python = ">=3.13"
+description = "A easy way to split documents in chunks"
+requires-python = ">=3.11.5"
 dependencies = [
     "langchain>=0.3.25",
     "langchain-experimental>=0.3.4",
-    "langchain-huggingface>=0.1.2"
+    "langchain-huggingface>=0.1.2",
+    "pytest-cov>=6.1.1",
 ]
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
@@ -19,12 +20,16 @@ license-files = ["LICEN[CS]E*"]
 develop = [
     "sentence-transformers==3.1.0",
     "setuptools>=80.1.0",
+    "pytest>=8.3.5",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
 
 [build-system]
 requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project.urls]
-Homepage = "https://github.com/pypa/sampleproject"
-Issues = "https://github.com/pypa/sampleproject/issues"
+Homepage = "https://github.com/samuhs/chop_doc"
+Issues = "https://github.com/samuhs/chop_doc/issues"

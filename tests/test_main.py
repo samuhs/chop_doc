@@ -1,3 +1,5 @@
+import pytest
+from chop_doc import ChopDoc
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 
 from chop_doc import ChopDoc
@@ -44,34 +46,37 @@ embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-b
 def test_character_chunking():
     chunking = ChopDoc()
     result = chunking.character_splitter(TEXT_DOC)
-    return result
+    assert len(result) == 26
 
 
 def test_recursive_character_chunking():
     chunking = ChopDoc()
     result = chunking.recursive_character_splitter(TEXT_DOC)
-    return result
+    assert len(result) == 29
 
 
-def test_document_specific_chunking(text, type):
+@pytest.mark.parametrize(
+    "text, type, expected_chunks",
+    [
+        (
+            TEXT_MARKDOWN,
+            "markdown",
+            7
+        ),
+        (
+            TEXT_PYTHON,
+            "python",
+            6
+        ),
+    ]
+)
+def test_document_specific_chunking(text, type, expected_chunks):
     chunking = ChopDoc()
     result = chunking.document_specific_splitter(text, type)
-    return result
+    assert len(result) == expected_chunks
 
 
 def test_semantic_chunking():
     chunking = ChopDoc()
     result = chunking.semantic_splitter(TEXT_DOC, embeddings)
-    return result
-
-
-print("---- Character Chunking Tests ----")
-print(len(test_character_chunking()))
-print("---- Recursive Character Chunking Tests ----")
-print(len(test_recursive_character_chunking()))
-print("---- Document Specific Chunking Tests - PYTHON ----")
-print(len(test_document_specific_chunking(TEXT_PYTHON, "python")))
-print("---- Document Specific Chunking Tests - MARKDOWN ----")
-print(len(test_document_specific_chunking(TEXT_MARKDOWN, "markdown")))
-print("---- Semantic Chuking Tests ----")
-print(len(test_semantic_chunking()))
+    assert len(result) == 2

@@ -1,1 +1,0 @@
-from .chop_doc.main import ChopDoc
