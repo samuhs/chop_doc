@@ -1,0 +1,30 @@
+[project]
+name = "chopdoc"
+version = "0.1.0"
+readme = "README.md"
+authors = [
+  { name="Samuel Silva", email="samuelhs98@gmail.com" },
+]
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "langchain>=0.3.25",
+    "langchain-experimental>=0.3.4",
+    "langchain-huggingface>=0.1.2"
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.optional-dependencies]
+develop = [
+    "sentence-transformers==3.1.0",
+    "setuptools>=80.1.0",
+]
+
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project.urls]
+Homepage = "https://github.com/pypa/sampleproject"
+Issues = "https://github.com/pypa/sampleproject/issues"
